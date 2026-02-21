@@ -1,0 +1,276 @@
+/* plugins/workflow_visualization/assets/stylesheets/workflow_visualization.css */
+
+/* ── 전체 컨테이너 ── */
+.wv-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ── 필터 바 ── */
+.wv-filter-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.wv-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 200px;
+}
+
+.wv-select {
+  padding: 6px 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #fff;
+}
+
+/* ── 범례 ── */
+.wv-legend {
+  display: flex;
+  gap: 20px;
+  padding: 10px 16px;
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.wv-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #495057;
+}
+
+.wv-badge {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+}
+
+.wv-badge-open      { background: #e3f2fd; }
+.wv-badge-closed    { background: #e8f5e9; }
+.wv-badge-initial   { background: #fff9c4; border-color: #f0a500; }
+.wv-line            { font-family: monospace; font-weight: bold; }
+.wv-line-normal     { color: #1565c0; }
+.wv-line-author     { color: #e65100; }
+
+/* ── 그래프 패널 ── */
+.wv-graph-panel {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wv-graph-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f1f3f5;
+  border-bottom: 1px solid #dee2e6;
+  flex-wrap: wrap;
+}
+
+.wv-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  gap: 4px;
+}
+
+.tracker-chip { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+.role-chip    { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+
+.wv-stat {
+  margin-left: auto;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* ── Mermaid 다이어그램 컨테이너 ── */
+.wv-mermaid-container {
+  padding: 24px;
+  background: #ffffff;
+  min-height: 300px;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.mermaid {
+  width: 100%;
+  text-align: center;
+}
+
+/* ── 전환 상세 테이블 ── */
+.wv-detail-panel {
+  padding: 16px;
+  border-top: 1px solid #dee2e6;
+  background: #fafafa;
+}
+
+.wv-detail-panel h3 {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  color: #343a40;
+}
+
+.wv-transition-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.wv-transition-table th,
+.wv-transition-table td {
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+.wv-transition-table th {
+  background: #f1f3f5;
+  font-weight: 600;
+  color: #495057;
+}
+
+.wv-transition-table tr:nth-child(even) td {
+  background: #f8f9fa;
+}
+
+.wv-arrow { text-align: center; font-size: 16px; color: #1565c0; }
+
+.wv-status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── 태그 ── */
+.wv-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.wv-tag-all      { background: #d1ecf1; color: #0c5460; }
+.wv-tag-author   { background: #fff3cd; color: #856404; }
+.wv-tag-assignee { background: #d4edda; color: #155724; }
+
+/* ── 빈 상태 & 웰컴 ── */
+.wv-empty-state,
+.wv-welcome {
+  text-align: center;
+  padding: 48px 24px;
+  color: #6c757d;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.wv-welcome-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+/* ── 에러 패널 (신규 추가) ── */
+.wv-error-panel {
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+.wv-error-message {
+  background: #fff3f3;
+  padding: 16px 20px;
+  color: #721c24;
+  font-size: 14px;
+  line-height: 1.6;
+  border-bottom: 1px solid #f5c6cb;
+}
+
+.wv-error-detail {
+  font-family: monospace;
+  font-size: 12px;
+  color: #a94442;
+  display: block;
+  margin-top: 6px;
+}
+
+.wv-toggle-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  background: #f8f9fa;
+  border: none;
+  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+  cursor: pointer;
+  font-size: 13px;
+  color: #495057;
+}
+
+.wv-toggle-btn:hover {
+  background: #e9ecef;
+}
+
+.wv-definition-pre {
+  margin: 0;
+  padding: 16px;
+  background: #2d2d2d;
+  color: #f8f8f2;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* ── SVG 툴바 ── */
+.wv-svg-toolbar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.wv-svg-btn {
+  padding: 4px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+.wv-svg-btn:hover {
+  background: #e9ecef;
+}

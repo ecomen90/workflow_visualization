@@ -1,0 +1,8 @@
+# plugins/workflow_visualization/config/locales/ko.yml
+
+ko:
+  label_workflow_visualization:        업무흐름 시각화
+  label_select_tracker_and_role:       Tracker와 Role을 선택하세요
+  permission_view_workflow_visualization: 업무흐름 시각화 보기
+  label_transitions:                   상태 전환
+  label_statuses:                      이슈 상태

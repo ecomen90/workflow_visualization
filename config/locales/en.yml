@@ -1,0 +1,8 @@
+# plugins/workflow_visualization/config/locales/en.yml
+
+en:
+  label_workflow_visualization:        Workflow Visualization
+  label_select_tracker_and_role:       Select Tracker and Role
+  permission_view_workflow_visualization: View Workflow Visualization
+  label_transitions:                   Transitions
+  label_statuses:                      Issue Statuses

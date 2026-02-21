@@ -1,0 +1,140 @@
+<%# plugins/workflow_visualization/app/views/workflow_visualizations/index.html.erb %>
+
+<% html_title l(:label_workflow_visualization) %>
+
+<div class="wv-container">
+  <h2>
+    <%= l(:label_workflow_visualization) %>
+  </h2>
+
+  <%# ── 필터 폼 ── %>
+  <%= form_tag(workflow_visualization_path, method: :get, id: 'wv-filter-form') do %>
+    <div class="wv-filter-bar">
+      <div class="wv-filter-group">
+        <label for="tracker_id"><strong><%= l(:field_tracker) %></strong></label>
+        <%= select_tag :tracker_id,
+              options_from_collection_for_select(
+                @trackers, :id, :name, @selected_tracker_id
+              ),
+              prompt:    l(:label_all),
+              class:     'wv-select',
+              id:        'tracker_id' %>
+      </div>
+
+      <div class="wv-filter-group">
+        <label for="role_id"><strong><%= l(:field_role) %></strong></label>
+        <%= select_tag :role_id,
+              options_from_collection_for_select(
+                @roles, :id, :name, @selected_role_id
+              ),
+              prompt:    l(:label_all),
+              class:     'wv-select',
+              id:        'role_id' %>
+      </div>
+
+      <div class="wv-filter-group wv-filter-submit">
+        <%= submit_tag l(:button_apply),
+              class: 'button-positive',
+              id:    'wv-apply-btn' %>
+      </div>
+    </div>
+  <% end %>
+
+  <%# ── 범례(Legend) ── %>
+  <div class="wv-legend">
+    <span class="wv-legend-item">
+      <span class="wv-badge wv-badge-open"></span> 진행 중 상태
+    </span>
+    <span class="wv-legend-item">
+      <span class="wv-badge wv-badge-closed"></span> 종료 상태
+    </span>
+    <span class="wv-legend-item">
+      <span class="wv-badge wv-badge-initial"></span> 초기 상태
+    </span>
+    <span class="wv-legend-item">
+      <span class="wv-line wv-line-normal">───▶</span> 일반 전환
+    </span>
+    <span class="wv-legend-item">
+      <span class="wv-line wv-line-author">- - ▶</span> 작성자만
+    </span>
+  </div>
+
+  <%# ── 그래프 영역 ── %>
+  <% if @graph_data %>
+    <div class="wv-graph-panel">
+      <div class="wv-graph-header">
+        <span class="wv-chip tracker-chip">
+          Tracker: <strong><%= @tracker.name %></strong>
+        </span>
+        <span class="wv-chip role-chip">
+          Role: <strong><%= @role.name %></strong>
+        </span>
+        <span class="wv-stat">
+          <%= @graph_data[:nodes].size %> 상태 /
+          <%= @graph_data[:edges].size %> 전환
+        </span>
+      </div>
+
+      <%# ★ Mermaid 다이어그램 컨테이너 %>
+      <%# mermaid_div_tag 헬퍼 사용 → data-mermaid-src 속성 자동 부여 %>
+      <div id="wv-mermaid-container" class="wv-mermaid-container">
+          <%=raw mermaid_div_tag(@graph_data) %>
+      </div>
+
+      <%# 전환 상세 테이블 %>
+      <div class="wv-detail-panel">
+        <h3>전환 상세 목록</h3>
+        <table class="list wv-transition-table">
+          <thead>
+            <tr>
+              <th>From Status</th>
+              <th>→</th>
+              <th>To Status</th>
+              <th>제약 조건</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @graph_data[:edges].each do |edge| %>
+              <tr>
+                <td><span class="wv-status-badge"><%= edge[:from_name] %></span></td>
+                <td class="wv-arrow">→</td>
+                <td><span class="wv-status-badge"><%= edge[:to_name] %></span></td>
+                <td>
+                  <% if edge[:author_only] %>
+                    <span class="wv-tag wv-tag-author">작성자 전용</span>
+                  <% end %>
+                  <% if edge[:assignee_only] %>
+                    <span class="wv-tag wv-tag-assignee">담당자 전용</span>
+                  <% end %>
+                  <% unless edge[:author_only] || edge[:assignee_only] %>
+                    <span class="wv-tag wv-tag-all">모든 사용자</span>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% elsif @selected_tracker_id > 0 && @selected_role_id > 0 %>
+    <div class="wv-empty-state">
+      <p>⚠️ 선택한 Tracker / Role 조합에 대한 워크플로우가 정의되지 않았습니다.</p>
+      <p>
+        <%= link_to '워크플로우 설정으로 이동',
+              url_for(controller: 'workflows', action: 'edit'),
+              class: 'button' %>
+      </p>
+    </div>
+  <% else %>
+    <div class="wv-welcome">
+      <div class="wv-welcome-icon">📊</div>
+      <p>Tracker와 Role을 선택하면 워크플로우 다이어그램이 표시됩니다.</p>
+    </div>
+  <% end %>
+</div>
+
+<%# 에셋 로드 %>
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'workflow_visualization', plugin: 'workflow_visualization' %>
+  <%= javascript_include_tag 'workflow_visualization', plugin: 'workflow_visualization' %>
+<% end %>
