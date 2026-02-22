@@ -14,7 +14,7 @@ Redmine::Plugin.register :workflow_visualization do
        :workflow_visualization,
        { controller: 'workflow_visualizations', action: 'index' },
        caption:  :label_workflow_visualization,
-       html:     { class: 'icon' },
+       html:     { class: 'icon icon-workflow' },
        after:    :workflows
 
   # 권한 선언
