@@ -17,14 +17,14 @@ class WorkflowVisualizationsController < ApplicationController
     @selected_role_id    = params[:role_id].presence || '1'
 
     tracker_ids =
-      if @selected_tracker_id == 'all'
+      if @selected_tracker_id == '1'
         @trackers.pluck(:id)
       else
         [@selected_tracker_id.to_i]
       end
 
     role_ids =
-      if @selected_role_id == 'all'
+      if @selected_role_id == '1'
         @roles.pluck(:id)
       else
         [@selected_role_id.to_i]
