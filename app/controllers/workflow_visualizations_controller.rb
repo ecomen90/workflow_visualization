@@ -13,8 +13,8 @@ class WorkflowVisualizationsController < ApplicationController
     @roles    = Role.givable.sorted
 
     # ✅ 기본값 처리
-    @selected_tracker_id = params[:tracker_id].presence || 'all'
-    @selected_role_id    = params[:role_id].presence || 'all'
+    @selected_tracker_id = params[:tracker_id].presence || '1'
+    @selected_role_id    = params[:role_id].presence || '1'
 
     tracker_ids =
       if @selected_tracker_id == 'all'
