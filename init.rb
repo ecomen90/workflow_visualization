@@ -2,7 +2,7 @@
 
 Redmine::Plugin.register :workflow_visualization do
   name        'Workflow Visualization'
-  author      'BYUNGJONG MOOON'
+  author      'ByungJong Moon: bjmoon@metagrin.net'
   description 'Visualizes Redmine workflow transitions as interactive diagrams'
   version     '1.0.0'
   url         'https://github.com/ecomen90/workflow_visualization'
