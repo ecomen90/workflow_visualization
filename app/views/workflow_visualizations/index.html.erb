@@ -64,10 +64,17 @@
     <div class="wv-graph-panel">
       <div class="wv-graph-header">
         <span class="wv-chip tracker-chip">
-          Tracker: <strong><%= @tracker.name %></strong>
+          Tracker:
+          <strong>
+            <%= @selected_tracker_id == 'all' ? 'All Trackers' : @tracker&.name %>
+          </strong>
         </span>
+        
         <span class="wv-chip role-chip">
-          Role: <strong><%= @role.name %></strong>
+          Role:
+          <strong>
+            <%= @selected_role_id == 'all' ? 'All Roles' : @role&.name %>
+          </strong>
         </span>
         <span class="wv-stat">
           <%= @graph_data[:nodes].size %> 상태 /
